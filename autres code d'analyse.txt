@@ -1,0 +1,33 @@
+
+- Pointbiserialr : 
+pour l'analyse de correlation entre prix et classe : 
+pointbiserialr est un autre méthode pour un groupe binaire
+
+from scipy.stats import pointbiserialr
+
+booking_copy = booking.copy()
+booking_copy["class_binary"] = booking_copy["class"].map({"Economy": 0, "Business": 1})
+
+# Si ta variable binaire est bien codée 0/1 ou booléenne
+pointbiserialr(booking_copy["class_binary"], booking_copy["price"])
+
+
+- ANOVA
+permet également d'identifier les correlation entre variable quantitative et qualitative
+dans le projet les conditions d'homogénéité des variance et de la normalité des résidus
+n'ont pas été respecté. L'ANOVA a été substitué par le Kruskall Wallis
+
+# confirmer avec un test ANOVA
+import pingouin as pg
+cat_vars = [cat for cat in categorical_col if cat != 'flight']
+for cat in cat_vars : 
+    anova_result = pg.anova(data=booking, dv="price", between=cat)
+    print(f"{cat} : ",'\n',anova_result, '\n' )
+
+
+Resultat du test ANOVA et du test poinbiserialr :
+- la variable "class" est significativement en lien avec le prix (p_val < 0.001) et a un énorme impact (np2 = 87.95% : 87.95% de la variance est expliqué par la variable "class")
+- la variable "airline" a également un lien avec le prix des billets (p_val < 0.001) et a un fort impact  (np2 = 22.26%)
+interpretation corrélation biserialr
+- le test pointbiserialr confirme le lien entre le prix et la variable "class" avec une forte corrélation de 0.93
+
