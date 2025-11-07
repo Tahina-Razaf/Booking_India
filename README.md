@@ -75,7 +75,7 @@ Le projet est contenu dans un unique **notebook**, regroupant toutes les étapes
 ### 3. Coefficients du modèle Lasso
 ![Coefficients du modèle Lasso](Visualisations%20clés/Coeff_Lasso.jpg)
 
-### 3. Précision du modèle Lasso
+### 4. Précision du modèle Lasso
 ![Précision du modèle Lasso](Visualisations%20clés/Model_precision.jpg)
 
 ---
